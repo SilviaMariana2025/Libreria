@@ -1,46 +1,6 @@
 import java.util.*;
 import java.time.*;
 
-
-
-class Usuario {
-    private String nombre;
-    private String idUsuario;
-    private List<Libro> librosPrestados;
-
-    public Usuario(String nombre, String idUsuario) {
-        this.nombre = nombre;
-        this.idUsuario = idUsuario;
-        this.librosPrestados = new ArrayList<>();
-    }
-
-    public String getIdUsuario() { return idUsuario; }
-    public List<Libro> getLibrosPrestados() { return librosPrestados; }
-
-    public void mostrarDatos() {
-        System.out.println("Usuario: " + nombre + " (ID: " + idUsuario + ")");
-        System.out.println("Libros prestados: ");
-        for (Libro l : librosPrestados) {
-            System.out.println(" - " + l.getCodigo());
-        }
-    }
-
-    public boolean agregarPrestamo(Libro libro) {
-        if (librosPrestados.size() < 3) {
-            librosPrestados.add(libro);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean devolverLibro(Libro libro) {
-        return librosPrestados.remove(libro);
-    }
-}
-
-
-
-
 class Biblioteca {
     private List<Libro> libros;
     private List<Usuario> usuarios;
@@ -61,27 +21,8 @@ class Biblioteca {
         usuarios.add(new Usuario(nombre, id));
         System.out.println("Usuario registrado con éxito.");
     }
-
-    public void mostrarLibrosDisponibles() {
-        for (Libro l : libros) {
-            if (l.isDisponible()) l.mostrarDatos();
-        }
-    }
-
-    public void mostrarUsuarios() {
-        for (Usuario u : usuarios) {
-            u.mostrarDatos();
-        }
-    }
-
-    public void mostrarHistorialPrestamos() {
-        for (Prestamo p : prestamos) {
-            p.mostrarDatos();
-        }
-    }
-
-    public void prestarLibro(String codigoLibro, String idUsuario) {
-        Libro libro = buscarLibro(codigoLibro);
+    public void prestarLibro(Integer  codigolibro, Integer idUsuario) {
+        Libr libro = buscarLibro (codigoLibro);
         Usuario usuario = buscarUsuario(idUsuario);
 
         if (libro == null || usuario == null) {
@@ -101,9 +42,8 @@ class Biblioteca {
         Prestamo p = new Prestamo(libro, usuario);
         prestamos.add(p);
         System.out.println("Préstamo realizado con éxito.");
-    }
 
-    public void devolverLibro(String codigoLibro, String idUsuario) {
+        public void devolverLibro(String codigoLibro, String idUsuario) {
         Libro libro = buscarLibro(codigoLibro);
         Usuario usuario = buscarUsuario(idUsuario);
 
@@ -117,7 +57,6 @@ class Biblioteca {
             System.out.println("Ese préstamo no existe.");
             return;
         }
-
      
         usuario.devolverLibro(libro);
         libro.marcarDisponible();
@@ -154,5 +93,23 @@ class Biblioteca {
         }
         return null;
     }
+     public void mostrarLibrosDisponibles() {
+        for (Libro l : libros) {
+            if (l.isDisponible()) l.mostrarDatos();
+        }
+    }
+
+    public void mostrarUsuarios() {
+        for (Usuario u : usuarios) {
+            u.mostrarDatos();
+        }
+    }
+
+    public void mostrarHistorialPrestamos() {
+        for (Prestamo p : prestamos) {
+            p.mostrarDatos();
+        }
+    }
 }
 
+    
