@@ -160,12 +160,12 @@ class Biblioteca {
             return;
         }
 
-  
+     
         usuario.devolverLibro(libro);
         libro.marcarDisponible();
         prestamos.remove(prestamo);
 
-  
+   
         LocalDate hoy = LocalDate.now();
         if (hoy.isAfter(prestamo.fechaLimite)) {
             long diasRetraso = Duration.between(prestamo.fechaLimite.atStartOfDay(), hoy.atStartOfDay()).toDays();
@@ -198,8 +198,7 @@ class Biblioteca {
     }
 }
 
-
-public class libreria {
+public class Libreria {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Biblioteca biblio = new Biblioteca();
